@@ -37,10 +37,11 @@ class ViewController: UIViewController {
         
         let alertController = UIAlertController(title: message, message: .none, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Play Again", style: .default, handler: {_ in self.createRandomNumber()}))
+        
         alertController.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: { _ in
             self.numberLabel.text = String("")
             self.uiSlider.value = 0
-            self.sliderValueLabel.text = String("")
+            self.sliderValueLabel.text = String("Play?")
         }))
         present(alertController, animated: true, completion: nil)
         
