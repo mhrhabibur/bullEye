@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     var  randomNumber: Int = 0
     
     var score: Int = 0
-    var level: Int = 1
+    var level: Int = 0
     
     @IBOutlet var numberLabel: UILabel!
     
@@ -66,6 +66,8 @@ class ViewController: UIViewController {
             if alertTitle == "Congratulation!" {
                 self.score += 1
                 
+            } else if alertTitle == "Sorry!"{
+                self.score -= 1
             }
             
             self.level += 1
