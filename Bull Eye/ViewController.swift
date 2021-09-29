@@ -12,11 +12,18 @@ class ViewController: UIViewController {
     var userAnswer: Int = 0
     var  randomNumber: Int = 0
     
+    var score: Int = 0
+    var level: Int = 1
+    
     @IBOutlet var numberLabel: UILabel!
     
     @IBOutlet var sliderValueLabel: UILabel!
     
     
+    @IBOutlet var Levellabel: UILabel!
+    
+    
+    @IBOutlet var scorelabel: UILabel!
     @IBOutlet var uiSlider: UISlider!
     
     override func viewDidLoad() {
@@ -28,42 +35,61 @@ class ViewController: UIViewController {
     
     @IBAction func hitMeButton(_ sender: UIButton) {
         
-        var title = ""
-        var message = ""
-        var startOver = ""
+        var alertTitle = ""
+        var alertMessage = ""
+        var startOverTitle = ""
+        
         if randomNumber == 0 {
-            title = "Attention!"
-            message = "You must start over first."
-            startOver = "Start Over"
+            
+            alertTitle = "Attention!"
+            alertMessage = "You must start over first."
+            startOverTitle = "Start Over"
+            
         } else if randomNumber != userAnswer{
-            title = "Sorry!"
-            message = "You lose."
-            startOver = "Play Again"
+           
+            alertTitle = "Sorry!"
+            alertMessage = "You lose."
+            startOverTitle = "Play Again"
+            
         } else if randomNumber == userAnswer {
             
-            title = "Congratulation!"
-             message = "You have won."
-             startOver = "Play Again"
+            alertTitle = "Congratulation!"
+             alertMessage = "You have won."
+             startOverTitle = "Play Again"
             
         }
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: startOver, style: .default, handler: {_ in self.createRandomNumber()}))
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: startOverTitle, style: .default, handler: {_ in self.createRandomNumber()
+            
+            
+            if alertTitle == "Congratulation!" {
+                self.score += 1
+                
+            }
+            
+            self.level += 1
+            
+            self.scorelabel.text = String(self.score)
+            self.Levellabel.text = String(self.level)
+        }))
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
             self.randomNumber = 0
             self.numberLabel.text = String("")
             self.uiSlider.value = 0
             self.sliderValueLabel.text = String("")
+            
+            self.scorelabel.text = String("0")
+            self.Levellabel.text = String("0")
         }))
         
         present(alertController, animated: true, completion: nil)
-        
     }
     
     
     @IBAction func sliderButton(_ sender: UISlider) {
-        //userAnswer = Int(sender.value)
+        
         userAnswer = lroundf(sender.value)
         sliderValueLabel.text = String(userAnswer)
     }
@@ -74,11 +100,14 @@ class ViewController: UIViewController {
         uiSlider.value = 0
         sliderValueLabel.text = String("")
         
+        
     }
     
     
     @IBAction func startOverButton(_ sender: UIButton) {
         createRandomNumber()
+        scorelabel.text = String(0)
+        Levellabel.text = String(1)
     }
     
     
