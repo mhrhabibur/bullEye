@@ -81,7 +81,7 @@ class ViewController: UIViewController {
             self.numberLabel.text = String("")
             self.uiSlider.value = 0
             self.sliderValueLabel.text = String("")
-            
+            self.level = 0
             self.scorelabel.text = String("0")
             self.Levellabel.text = String("0")
         }))
@@ -108,8 +108,10 @@ class ViewController: UIViewController {
     
     @IBAction func startOverButton(_ sender: UIButton) {
         createRandomNumber()
-        scorelabel.text = String(0)
-        Levellabel.text = String(1)
+        score = 0
+        level = 1
+        scorelabel.text = String(score)
+        Levellabel.text = String(level)
     }
     
     
